@@ -19,7 +19,8 @@
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each",
-    "prettier": "prettier --write \"app/*/*.js\""
+    "prettier": "prettier --write \"app/*/*.js\"",
+    "pretty-quick": "pretty-quick"
   },
   "dependencies": {
     "ember-cli-babel": "^7.1.2",
