@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-blank-slider`
+* `cd ember-blanc-slider`
 * `npm install`
 
 ## Linting

@@ -1,0 +1,14 @@
+<div class="blanc-slider-container">
+    <div class="blanc-slider-wrapper">
+        {{yield
+            (hash
+              slide=(component 'slide'
+              register=(action 'registerItem')
+              blancItems=blancItems)
+            )
+        }}
+    </div>
+</div>
+<button onclick={{action 'slidePrevious'}}>Previous</button>
+<button onclick={{action 'slideNext'}}>Next</button>
+

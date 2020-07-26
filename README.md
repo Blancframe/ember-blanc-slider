@@ -1,4 +1,4 @@
-ember-blank-slider
+ember-blanc-slider
 ==============================================================================
 
 [Short description of the addon.]
@@ -15,7 +15,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-blank-slider
+ember install ember-blanc-slider
 ```
 
 

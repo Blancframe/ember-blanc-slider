@@ -1,0 +1,28 @@
+.blanc-slider-container {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.blanc-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.blanc-slider-wrapper:before {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.blanc-slide {
+  display: none;
+  white-space: nowrap;
+  background-color: red;
+  height: 100%;
+  width: 400px;
+}
+
+.blanc-slide.active {
+  display: inline-block;
+}
