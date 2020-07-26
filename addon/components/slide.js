@@ -17,7 +17,7 @@ export default Component.extend({
     this.set('index', blancItems.indexOf(this));
   },
 
-  isActive: computed('blancItems.@each', function() {
+  isActive: computed('blancItems.@each', function () {
     return this === this.get('blancItems.firstObject');
-  })
+  }),
 });
