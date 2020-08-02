@@ -15,9 +15,6 @@ module('Integration | Component | blanc-slider', function (hooks) {
       {{/blanc-slider}}
     `);
 
-    assert.equal(
-      fullTrim(this.element.textContent),
-      'template block text Previous Next'
-    );
+    assert.equal(fullTrim(this.element.textContent), 'template block text');
   });
 });
