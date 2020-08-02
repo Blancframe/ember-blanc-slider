@@ -5,9 +5,9 @@ module.exports = {
   rules: {
     'no-bare-strings': false,
     'block-indentation': 4,
-    'nested-interactive': true,
+    'no-nested-interactive': true,
     'self-closing-void-elements': 'require',
-    'img-alt-attributes': true,
+    'require-valid-alt-text': true,
     'link-rel-noopener': false,
   },
 };
