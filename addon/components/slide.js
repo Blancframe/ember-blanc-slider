@@ -13,11 +13,11 @@ export default Component.extend({
     this._super(...arguments);
     if (typeOf(this.register) === 'function') {
       this.register(this);
+
+      let blancItems = this.blancItems;
+
+      this.set('index', blancItems.indexOf(this));
     }
-
-    let blancItems = this.blancItems;
-
-    this.set('index', blancItems.indexOf(this));
   },
 
   isActive: computed('blancItems.@each', function () {
