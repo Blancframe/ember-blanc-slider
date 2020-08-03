@@ -13,6 +13,12 @@
                 previous=(action "slidePrevious")
                 next=(action "slideNext")
                 autoPlayActive=autoPlayActive
+                navigation=(component
+                    "slide-navigation"
+                    items=blancItems
+                    slideAction=(action "slideTo")
+                    activeBlancItem=activeBlancItem
+                )
             )
         }}
     </div>

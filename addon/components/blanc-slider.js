@@ -84,5 +84,8 @@ export default Component.extend({
     slideNext() {
       this.slideDirection('next');
     },
+    slideTo(item) {
+      this.slide(item);
+    },
   },
 });

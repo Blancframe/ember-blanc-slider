@@ -71,3 +71,38 @@
     {{/if}}
     autoPlay = {{content.autoPlayActive}}
 {{/blanc-slider}}
+
+<h3>
+    Content slider with navigation
+</h3>
+{{#blanc-slider as |content|}}
+    <div class="container">
+        {{#content.slide}}
+            Slide one and some content
+        {{/content.slide}}
+        {{#content.slide}}
+            And an other slide
+        {{/content.slide}}
+        {{#content.slide}}
+            Yet an other one
+        {{/content.slide}}
+        {{#content.slide}}
+            An Other one (Dj Khaled)
+        {{/content.slide}}
+        {{#content.slide}}
+            The final slide
+        {{/content.slide}}
+        {{#content.slide}}
+            The final final slide
+        {{/content.slide}}
+    </div>
+    <button onclick={{action content.previous}} type="button">
+        Previous
+    </button>
+    <button onclick={{action content.next}} type="button">
+        Next
+    </button>
+    <br />
+
+    {{content.navigation}}
+{{/blanc-slider}}

@@ -26,3 +26,19 @@
 .blanc-slide.active {
   display: inline-block;
 }
+
+.blanc-slider-navigation {
+  display: flex;
+}
+
+.blanc-slider-navigation-item {
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+}
+
+.blanc-slider-navigation-item.active {
+  background-color: black;
+}
