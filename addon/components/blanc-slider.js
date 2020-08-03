@@ -5,13 +5,18 @@ import layout from '../templates/components/blanc-slider';
 
 export default Component.extend({
   layout,
+  autoPlayActive: false,
 
   init() {
     this._super(...arguments);
     this.blancItems = A();
+
+    if (this.auto) {
+      this.autoPlay();
+    }
   },
 
-  activeBlancItem: computed('blancItems.{lengTh,@each.isActive}', function () {
+  activeBlancItem: computed('blancItems.{length,@each.isActive}', function () {
     return this.blancItems.findBy('isActive');
   }),
 
@@ -29,31 +34,55 @@ export default Component.extend({
     });
   },
 
-  actions: {
-    registerItem(item) {
-      this.blancItems.pushObject(item);
-    },
-    slidePrevious() {
-      const activeIndex = this.activeBlancItem.index,
-        blancItems = this.blancItems.length;
-      let newIndex = activeIndex - 1;
+  slideDirection(direction) {
+    const activeIndex = this.activeBlancItem.index,
+      blancItems = this.blancItems.length;
+    let newIndex = null;
+
+    if (direction === 'previous') {
+      newIndex = activeIndex - 1;
 
       if (newIndex === -1) {
         newIndex = blancItems - 1;
       }
-
-      this.slide(newIndex);
-    },
-    slideNext() {
-      const activeIndex = this.activeBlancItem.index,
-        blancItems = this.blancItems.length;
-      let newIndex = activeIndex + 1;
+    } else if (direction === 'next') {
+      newIndex = activeIndex + 1;
 
       if (activeIndex === blancItems - 1) {
         newIndex = 0;
       }
+    }
 
-      this.slide(newIndex);
+    this.slide(newIndex);
+  },
+
+  autoPlay() {
+    this.set('autoPlayActive', true);
+    this._intervalId = setInterval(() => {
+      this.slideDirection('next');
+    }, this.interval || 3000);
+  },
+
+  stopPlay() {
+    this.set('autoPlayActive', false);
+    clearInterval(this._intervalId);
+  },
+
+  actions: {
+    registerItem(item) {
+      this.blancItems.pushObject(item);
+    },
+    play() {
+      this.autoPlay();
+    },
+    stop() {
+      this.stopPlay();
+    },
+    slidePrevious() {
+      this.slideDirection('previous');
+    },
+    slideNext() {
+      this.slideDirection('next');
     },
   },
 });

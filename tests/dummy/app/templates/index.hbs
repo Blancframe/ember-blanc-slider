@@ -1,27 +1,35 @@
-{{#blanc-slider as |content|}}
-    {{#content.slide}}
-        Slide one and some content
-    {{/content.slide}}
-    {{#content.slide}}
-        And an other slide
-    {{/content.slide}}
-    {{#content.slide}}
-        Yet an other one
-    {{/content.slide}}
-    {{#content.slide}}
-        An Other one (Dj Khaled)
-    {{/content.slide}}
-    {{#content.slide}}
-        The final slide
-    {{/content.slide}}
-    {{#content.slide}}
-        The final final slide
-    {{/content.slide}}
-
+{{#blanc-slider auto=true interval=1000 as |content|}}
+    <div class="container">
+        {{#content.slide}}
+            Slide one and some content
+        {{/content.slide}}
+        {{#content.slide}}
+            And an other slide
+        {{/content.slide}}
+        {{#content.slide}}
+            Yet an other one
+        {{/content.slide}}
+        {{#content.slide}}
+            An Other one (Dj Khaled)
+        {{/content.slide}}
+        {{#content.slide}}
+            The final slide
+        {{/content.slide}}
+        {{#content.slide}}
+            The final final slide
+        {{/content.slide}}
+    </div>
     <button onclick={{action content.previous}} type="button">
         Previous
     </button>
     <button onclick={{action content.next}} type="button">
         Next
     </button>
+    <button onclick={{action content.play}} type="button">
+        Play
+    </button>
+    <button onclick={{action content.stop}} type="button">
+        Stop
+    </button>
+    autoPlayActive = {{content.autoPlayActive}}
 {{/blanc-slider}}
