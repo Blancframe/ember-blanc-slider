@@ -1,0 +1,7 @@
+{{#each items as |item|}}
+    {{slide-navigation-item
+        index=item.index
+        slideAction=(action slideAction)
+        isActive=item.isActive
+    }}
+{{/each}}

@@ -8,13 +8,18 @@
                     register=(action "registerItem")
                     blancItems=blancItems
                 )
+                play=(action "play")
+                stop=(action "stop")
+                previous=(action "slidePrevious")
+                next=(action "slideNext")
+                autoPlayActive=autoPlayActive
+                navigation=(component
+                    "slide-navigation"
+                    items=blancItems
+                    slideAction=(action "slideTo")
+                    activeBlancItem=activeBlancItem
+                )
             )
         }}
     </div>
 </div>
-<button onclick={{action "slidePrevious"}} type="button">
-    Previous
-</button>
-<button onclick={{action "slideNext"}} type="button">
-    Next
-</button>
