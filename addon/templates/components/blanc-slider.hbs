@@ -1,25 +1,20 @@
-<div class="blanc-slider-container">
-    <div class="blanc-slider-wrapper">
-        {{
-            yield
-            (hash
-                slide=(component
-                    "slide"
-                    register=(action "registerItem")
-                    blancItems=blancItems
-                )
-                play=(action "play")
-                stop=(action "stop")
-                previous=(action "slidePrevious")
-                next=(action "slideNext")
-                autoPlayActive=autoPlayActive
-                navigation=(component
-                    "slide-navigation"
-                    items=blancItems
-                    slideAction=(action "slideTo")
-                    activeBlancItem=activeBlancItem
-                )
+{{#blanc-slider-list}}
+    {{yield
+        (hash
+            slide=(component
+                "slide" register=(action "registerItem") blancItems=blancItems
             )
-        }}
-    </div>
-</div>
+            play=(action "play")
+            stop=(action "stop")
+            previous=(action "slidePrevious")
+            next=(action "slideNext")
+            autoPlayActive=autoPlayActive
+            navigation=(component
+                "slide-navigation"
+                items=blancItems
+                slideAction=(action "slideTo")
+                activeBlancItem=activeBlancItem
+            )
+        )
+    }}
+{{/blanc-slider-list}}
