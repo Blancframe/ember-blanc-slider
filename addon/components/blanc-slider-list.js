@@ -4,11 +4,18 @@ import layout from '../templates/components/blanc-slider-list';
 import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
 
 export default Component.extend({
+  tagName: 'ul',
   layout,
   attributeBindings: ['style'],
 
   style: computed(function () {
-    const styles = { position: 'relative', overflow: 'hidden' };
+    const styles = {
+      margin: 'inherit',
+      padding: 'inherit',
+      position: 'relative',
+      overflow: 'hidden',
+      display: 'flex',
+    };
 
     return inlineStyles(styles);
   }),

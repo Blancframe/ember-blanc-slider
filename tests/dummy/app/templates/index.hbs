@@ -2,7 +2,7 @@
     Default content slider
 </h3>
 {{#blanc-slider as |content|}}
-    <div class="container">
+    {{#content.list}}
         {{#content.slide}}
             Slide one and some content
         {{/content.slide}}
@@ -21,7 +21,7 @@
         {{#content.slide}}
             The final final slide
         {{/content.slide}}
-    </div>
+    {{/content.list}}
     <button onclick={{action content.previous}} type="button">
         Previous
     </button>
@@ -34,7 +34,7 @@
     AutoPlay on and an interval of 2 seconds
 </h3>
 {{#blanc-slider auto=true interval=1000 as |content|}}
-    <div class="container">
+    {{#content.list}}
         {{#content.slide}}
             Slide one and some content
         {{/content.slide}}
@@ -53,7 +53,7 @@
         {{#content.slide}}
             The final final slide
         {{/content.slide}}
-    </div>
+    {{/content.list}}
     <button onclick={{action content.previous}} type="button">
         Previous
     </button>
@@ -76,7 +76,7 @@
     Content slider with navigation
 </h3>
 {{#blanc-slider as |content|}}
-    <div class="container">
+    {{#content.list}}
         {{#content.slide}}
             Slide one and some content
         {{/content.slide}}
@@ -95,7 +95,7 @@
         {{#content.slide}}
             The final final slide
         {{/content.slide}}
-    </div>
+    {{/content.list}}
     <button onclick={{action content.previous}} type="button">
         Previous
     </button>

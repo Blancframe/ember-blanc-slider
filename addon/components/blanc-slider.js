@@ -6,7 +6,7 @@ import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
 
 export default Component.extend({
   classNames: ['blanc-slider-container'],
-  attributeBindings: ['aria-label', 'tabindex', 'role', 'style'],
+  attributeBindings: ['aria-label', 'aria-live', 'tabindex', 'role', 'style'],
   layout,
   autoPlayActive: false,
 
@@ -82,7 +82,11 @@ export default Component.extend({
   },
 
   'aria-label': computed(function () {
-    return 'gallery';
+    return 'carousel';
+  }),
+
+  'aria-live': computed(function () {
+    return 'polite';
   }),
 
   tabindex: computed(function () {
