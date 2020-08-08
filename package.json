@@ -16,6 +16,7 @@
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
+    "lint": "npm run lint:js && npm run lint:hbs",
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each",
@@ -65,7 +66,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier && pretty-quick --staged && git add ."
+      "pre-commit": "npm run prettier && npm run lint && pretty-quick --staged && git add ."
     }
   }
 }
