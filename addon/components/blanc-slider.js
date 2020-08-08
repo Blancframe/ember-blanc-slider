@@ -2,10 +2,23 @@ import Component from '@ember/component';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
 import layout from '../templates/components/blanc-slider';
+import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
 
 export default Component.extend({
+  classNames: ['blanc-slider-container'],
+  attributeBindings: ['aria-label', 'aria-live', 'tabindex', 'role', 'style'],
   layout,
   autoPlayActive: false,
+
+  style: computed(function () {
+    const styles = {
+      position: 'relative',
+      overflow: 'hidden',
+      display: 'block',
+    };
+
+    return inlineStyles(styles);
+  }),
 
   init() {
     this._super(...arguments);
@@ -67,6 +80,22 @@ export default Component.extend({
     this.set('autoPlayActive', false);
     clearInterval(this._intervalId);
   },
+
+  'aria-label': computed(function () {
+    return 'carousel';
+  }),
+
+  'aria-live': computed(function () {
+    return 'polite';
+  }),
+
+  tabindex: computed(function () {
+    return 0;
+  }),
+
+  role: computed(function () {
+    return 'region';
+  }),
 
   actions: {
     registerItem(item) {
