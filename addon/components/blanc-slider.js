@@ -3,6 +3,8 @@ import { A } from '@ember/array';
 import { computed } from '@ember/object';
 import layout from '../templates/components/blanc-slider';
 import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
+import fadeSlide from 'ember-blanc-slider/animations/fade-slide';
+import fade from 'ember-blanc-slider/animations/fade';
 
 export default Component.extend({
   classNames: ['blanc-slider-container'],
@@ -33,10 +35,29 @@ export default Component.extend({
     return this.blancItems.findBy('isActive');
   }),
 
-  slide(activeIndex) {
+  slide(activeIndex, dir) {
     let items = this.blancItems;
     let activeBlancItem = this.activeBlancItem;
     let newActiveItem = items[activeIndex];
+    let direction = dir === 'next';
+    const customAnimation = this.use || 'default';
+    const animationObject = {
+      default: (...args) => {
+        return fadeSlide(...args);
+      },
+      fadeSlide: (...args) => {
+        return fadeSlide(...args);
+      },
+      fade: (...args) => {
+        return fade(...args);
+      },
+    };
+
+    animationObject[customAnimation](
+      newActiveItem.element,
+      activeBlancItem.element,
+      direction
+    );
 
     activeBlancItem.setProperties({
       isActive: false,
@@ -58,15 +79,17 @@ export default Component.extend({
       if (newIndex === -1) {
         newIndex = blancItems - 1;
       }
+
+      this.slide(newIndex), 'previous';
     } else if (direction === 'next') {
       newIndex = activeIndex + 1;
 
       if (activeIndex === blancItems - 1) {
         newIndex = 0;
       }
-    }
 
-    this.slide(newIndex);
+      this.slide(newIndex, 'next');
+    }
   },
 
   autoPlay() {

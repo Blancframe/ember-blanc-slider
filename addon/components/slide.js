@@ -15,6 +15,9 @@ export default Component.extend({
   style: computed('isActive', function () {
     const styles = {
       'white-space': 'nowrap',
+      position: this.isActive ? 'relative' : 'absolute',
+      opacity: this.isActive ? '1' : '0',
+      'list-style-type': 'none',
       height: '100%',
     };
 
