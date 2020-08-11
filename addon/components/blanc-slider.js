@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import layout from '../templates/components/blanc-slider';
 import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
 import fadeSlide from 'ember-blanc-slider/animations/fade-slide';
+import fade from 'ember-blanc-slider/animations/fade';
 
 export default Component.extend({
   classNames: ['blanc-slider-container'],
@@ -46,6 +47,9 @@ export default Component.extend({
       },
       fadeSlide: (...args) => {
         return fadeSlide(...args);
+      },
+      fade: (...args) => {
+        return fade(...args);
       },
     };
 
