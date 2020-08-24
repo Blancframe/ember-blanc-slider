@@ -4,8 +4,9 @@ export default function fadeSlide(newElement, oldElement, direction) {
       {
         transform: direction ? 'translateX(30px)' : 'translateX(-30px)',
         opacity: 0,
+        visibility: 'hidden',
       },
-      { transform: 'translateX(0px)', opacity: 1 },
+      { transform: 'translateX(0px)', opacity: 1, visibility: 'visible' },
     ],
     {
       easing: 'ease-in-out',
@@ -16,10 +17,11 @@ export default function fadeSlide(newElement, oldElement, direction) {
 
   oldElement.animate(
     [
-      { transform: 'translateX(0)', opacity: 1 },
+      { transform: 'translateX(0)', opacity: 1, visibility: 'visible' },
       {
         transform: direction ? 'translateX(-30px)' : 'translateX(30px)',
         opacity: 0,
+        visibility: 'hidden',
       },
     ],
     {
