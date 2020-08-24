@@ -3,8 +3,9 @@ import { computed } from '@ember/object';
 import { typeOf } from '@ember/utils';
 import layout from '../templates/components/slide';
 import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
+import SwipeMixin from 'ember-blanc-slider/mixins/swipe';
 
-export default Component.extend({
+export default Component.extend(SwipeMixin, {
   tagName: 'li',
   classNames: ['blanc-slide'],
   classNameBindings: ['isActive:active'],
