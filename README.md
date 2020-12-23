@@ -1,7 +1,7 @@
 ember-blanc-slider
 ==============================================================================
 
-[Short description of the addon.]
+Accessible simple content slider
 
 
 Compatibility
@@ -22,7 +22,24 @@ ember install ember-blanc-slider
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+```handlebars
+{{#blanc-slider as |content|}}
+    {{#content.list}}
+        {{#content.slide}}
+            Slide one and some content
+        {{/content.slide}}
+        {{#content.slide}}
+            Another one (Dj Khaled)
+        {{/content.slide}}
+    {{/content.list}}
+    <button onclick={{action content.previous}} type="button">
+        Previous
+    </button>
+    <button onclick={{action content.next}} type="button">
+        Next
+    </button>
+{{/blanc-slider}}
+```
 
 
 License
