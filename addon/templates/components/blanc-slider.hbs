@@ -2,7 +2,11 @@
     (hash
         list=(component "blanc-slider-list")
         slide=(component
-            "slide" register=(action "registerItem") blancItems=blancItems
+            "slide"
+            register=(action "registerItem")
+            blancItems=blancItems
+            previous=(action "slidePrevious")
+            next=(action "slideNext")
         )
         play=(action "play")
         stop=(action "stop")
