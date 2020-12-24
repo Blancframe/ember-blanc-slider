@@ -7,20 +7,20 @@ module('Integration | Component | blanc-slider-list', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
-    await render(hbs`{{blanc-slider-list}}`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
     await render(hbs`
       {{#blanc-slider-list}}
-        template block text
+          <div>Item</div>
+          <div>Item</div>
+          <div>Item</div>
       {{/blanc-slider-list}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    const list = this.element.querySelector('ul');
+
+    assert.equal(list.querySelectorAll('div').length, 3);
+    assert.equal(
+      list.style.cssText,
+      'margin: inherit; padding: inherit; position: relative; overflow: hidden; display: flex;'
+    );
   });
 });
