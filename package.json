@@ -21,10 +21,11 @@
     "lint:js": "eslint .",
     "lint": "npm run lint:js && npm run lint:hbs",
     "start": "ember serve",
-    "test": "ember test",
+    "test": "COVERAGE=true ember test",
     "test:all": "ember try:each",
     "prettier": "prettier --write \"app/*/*.js\"",
-    "pretty-quick": "pretty-quick"
+    "pretty-quick": "pretty-quick",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "ember-cli-babel": "^7.1.2",
@@ -35,6 +36,7 @@
     "broccoli-asset-rev": "^2.7.0",
     "coveralls": "^3.1.0",
     "ember-cli": "~3.7.1",
+    "ember-cli-code-coverage": "^1.0.2",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^4.2.3",
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
