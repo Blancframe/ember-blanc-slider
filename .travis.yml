@@ -56,5 +56,8 @@ before_install:
   - npm install -g npm@6
   - npm --version
 
+after_script:
+  - bash -c "cat ./coverage/lcov.info |  ./node_modules/coveralls/bin/coveralls.js || echo 'lcon.info not found, skipping coveralls'"
+
 script:
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
