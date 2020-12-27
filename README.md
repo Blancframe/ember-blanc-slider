@@ -1,26 +1,19 @@
-ember-blanc-slider
-==============================================================================
+# ember-blanc-slider [![Build Status](https://travis-ci.com/Blancframe/ember-blanc-slider.svg?branch=master)](https://travis-ci.com/Blancframe/ember-blanc-slider)
 
 Accessible simple content slider
 
+## Compatibility
 
-Compatibility
-------------------------------------------------------------------------------
+- Ember.js v2.18 or above
+- Ember CLI v2.13 or above
 
-* Ember.js v2.18 or above
-* Ember CLI v2.13 or above
-
-
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 ```
 ember install ember-blanc-slider
 ```
 
-
-Usage
-------------------------------------------------------------------------------
+## Usage
 
 ```handlebars
 {{#blanc-slider as |content|}}
@@ -41,8 +34,6 @@ Usage
 {{/blanc-slider}}
 ```
 
-
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
