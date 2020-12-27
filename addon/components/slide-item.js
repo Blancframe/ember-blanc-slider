@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { typeOf } from '@ember/utils';
-import layout from '../templates/components/slide';
+import layout from '../templates/components/slide-item';
 import inlineStyles from 'ember-blanc-slider/utils/inline-styles';
 import SwipeMixin from 'ember-blanc-slider/mixins/swipe';
 
