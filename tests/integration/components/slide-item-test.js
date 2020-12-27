@@ -2,18 +2,19 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import EmberObject from '@ember/object';
 
 module('Integration | Component | slide-item', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
     this.set('items', [
-      { index: 1, isActive: false },
-      { index: 2, isActive: true },
-      { index: 3, isActive: false },
+      EmberObject.create({ index: 1, isActive: false }),
+      EmberObject.create({ index: 2, isActive: true }),
+      EmberObject.create({ index: 3, isActive: false }),
     ]);
-    this.set('register', (index) => {
-      assert.equal(index, 1);
+    this.set('register', () => {
+      this.items.push(EmberObject.create({ index: 4, isActive: true }));
     });
     this.set('previous', (index) => {
       assert.equal(index, 1);
@@ -23,10 +24,16 @@ module('Integration | Component | slide-item', function (hooks) {
     });
 
     await render(hbs`
-      {{slide-item blancItems=items register=register prevous=previous next=next
+      {{#slide-item
+        blancItems=items
+        previous=previous
+        next=next
+        isActive=true
       }}
+          Item content
+      {{/slide-item}}
     `);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.equal(this.element.textContent.trim(), 'Item content');
   });
 });
