@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | blanc-slider', function (hooks) {
@@ -52,5 +52,51 @@ module('Integration | Component | blanc-slider', function (hooks) {
       list[1].style.cssText,
       'white-space: nowrap; position: absolute; visibility: hidden; list-style-type: none; height: 100%;'
     );
+  });
+
+  test('we can navigate tru slider with previous and next buttons', async function (assert) {
+    await render(hbs`
+      {{#blanc-slider auto=false as |content|}}
+          {{#content.list}}
+              {{#content.slide}}
+                  Slide one and some content
+              {{/content.slide}}
+              {{#content.slide}}
+                  And an other slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  Yet an other one
+              {{/content.slide}}
+          {{/content.list}}
+          <button class="button-previous" onclick={{action content.previous}} type="button">
+              Previous
+          </button>
+          <button class="button-next" onclick={{action content.next}} type="button">
+              Next
+          </button>
+      {{/blanc-slider}}
+    `);
+
+    const list = this.element.querySelectorAll('ul li');
+    const previous = this.element.querySelector('.button-previous');
+    const next = this.element.querySelector('.button-next');
+
+    assert.equal(list[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(list[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(list[2].getAttribute('aria-atomic'), 'false');
+
+    await click(next);
+
+    assert.equal(list[0].getAttribute('aria-atomic'), 'false');
+    assert.equal(list[1].getAttribute('aria-atomic'), 'true');
+    assert.equal(list[2].getAttribute('aria-atomic'), 'false');
+
+    await click(next);
+    await click(previous);
+    await click(previous);
+
+    assert.equal(list[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(list[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(list[2].getAttribute('aria-atomic'), 'false');
   });
 });
