@@ -7,7 +7,7 @@ module('Integration | Component | blanc-slider', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    assert.expect(4);
+    assert.expect(2);
 
     await render(hbs`
       {{#blanc-slider as |content|}}
@@ -44,14 +44,6 @@ module('Integration | Component | blanc-slider', function (hooks) {
 
     assert.equal(list.length, 6);
     assert.equal(list[0].getAttribute('aria-atomic'), 'true');
-    assert.equal(
-      list[0].style.cssText,
-      'white-space: nowrap; position: relative; visibility: visible; list-style-type: none; height: 100%;'
-    );
-    assert.equal(
-      list[1].style.cssText,
-      'white-space: nowrap; position: absolute; visibility: hidden; list-style-type: none; height: 100%;'
-    );
   });
 
   test('we can navigate tru slider with previous and next buttons', async function (assert) {
