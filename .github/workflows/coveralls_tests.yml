@@ -1,6 +1,10 @@
-on: ['push']
-
 name: Test Coveralls
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   coverage:
@@ -22,7 +26,7 @@ jobs:
           npm test
           npm run coveralls
 
-      - name: Coveralls
+      - naMe: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
