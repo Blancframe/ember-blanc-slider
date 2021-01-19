@@ -11,7 +11,7 @@ module.exports = function () {
     return {
       scenarios: [
         {
-          name: 'ember-lts-2.16',
+          name: 'ember-lts-2.18',
           env: {
             EMBER_OPTIONAL_FEATURES: JSON.stringify({
               'jquery-integration': true,
@@ -20,7 +20,7 @@ module.exports = function () {
           npm: {
             devDependencies: {
               '@ember/jquery': '^0.5.1',
-              'ember-source': '~2.16.2',
+              'ember-source': '~2.18.0',
             },
           },
         },
