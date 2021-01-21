@@ -16,8 +16,8 @@ export default Component.extend(SwipeMixin, {
   style: computed('isActive', function () {
     const styles = {
       'white-space': 'nowrap',
-      position: this.isActive ? 'relative' : 'absolute',
-      visibility: this.isActive ? 'visible' : 'hidden',
+      position: this.get('isActive') ? 'relative' : 'absolute',
+      visibility: this.get('isActive') ? 'visible' : 'hidden',
       'list-style-type': 'none',
       height: '100%',
     };
@@ -26,7 +26,7 @@ export default Component.extend(SwipeMixin, {
   }),
 
   'aria-atomic': computed('isActive', function () {
-    return this.isActive ? 'true' : 'false';
+    return this.get('isActive') ? 'true' : 'false';
   }),
 
   tabindex: computed(function () {

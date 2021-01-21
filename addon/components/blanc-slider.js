@@ -32,15 +32,15 @@ export default Component.extend({
   },
 
   activeBlancItem: computed('blancItems.{length,@each.isActive}', function () {
-    return this.blancItems.findBy('isActive');
+    return this.get('blancItems').findBy('isActive');
   }),
 
   slide(activeIndex, dir) {
-    let items = this.blancItems;
-    let activeBlancItem = this.activeBlancItem;
+    let items = this.get('blancItems');
+    let activeBlancItem = this.get('activeBlancItem');
     let newActiveItem = items[activeIndex];
     let direction = dir === 'next';
-    const customAnimation = this.use || 'default';
+    const customAnimation = this.get('use') || 'default';
     const animationObject = {
       default: (...args) => {
         return fadeSlide(...args);
@@ -69,8 +69,8 @@ export default Component.extend({
   },
 
   slideDirection(direction) {
-    const activeIndex = this.activeBlancItem.index,
-      blancItems = this.blancItems.length;
+    const activeIndex = this.get('activeBlancItem.index'),
+      blancItems = this.get('blancItems').length;
     let newIndex = null;
 
     if (direction === 'previous') {
@@ -122,7 +122,7 @@ export default Component.extend({
 
   actions: {
     registerItem(item) {
-      this.blancItems.pushObject(item);
+      this.get('blancItems').pushObject(item);
     },
     play() {
       this.autoPlay();
