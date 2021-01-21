@@ -54,9 +54,9 @@ module('Integration | Component | blanc-slider', function (hooks) {
     );
   });
 
-  test('we can navigate tru slider with previous and next buttons', async function (assert) {
+  test('we can navigate thru slider with previous and next buttons', async function (assert) {
     assert.expect(9);
-
+  
     await render(hbs`
       {{#blanc-slider auto=false use="fade" as |content|}}
           {{#content.list}}
