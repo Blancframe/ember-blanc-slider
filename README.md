@@ -36,6 +36,59 @@ ember install ember-blanc-slider
 {{/blanc-slider}}
 ```
 
+### Available options
+
+- `use` - type of animation, at this moment only `fade` or `fadeSlide`. Defaults to `fade`. In the future it should be possible to add custom animations.
+- `auto` - Defaults to `false`, this will auto play the slider
+
+### `next`
+
+Navigate to the next slide
+
+```handlebars
+{{content.next}}
+```
+
+### `previous`
+
+Navigate to the previous slide
+
+```handlebars
+{{content.previous}}
+```
+
+### `play`
+
+Will auto play the slides
+
+```handlebars
+{{content.play}}
+```
+
+### `stop`
+
+Will stop the auto play
+
+```handlebars
+{{content.stop}}
+```
+
+### `autoPlayActive`
+
+Returns boolean, will be true when auto play
+
+```handlebars
+{{content.autoPlayActive}}
+```
+
+### `navigation`
+
+Will show the navigation
+
+```handlebars
+{{content.navigation}}
+```
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
