@@ -288,4 +288,50 @@ module('Integration | Component | blanc-slider', function (hooks) {
     assert.equal(list[1].getAttribute('aria-atomic'), 'false');
     assert.equal(list[2].getAttribute('aria-atomic'), 'false');
   });
+
+  test('it renders custom navigation', async function (assert) {
+    // assert.expect(4);
+
+    await render(hbs`
+      {{#blanc-slider as |content|}}
+          {{#content.list}}
+              {{#content.slide}}
+                  Slide one and some content
+              {{/content.slide}}
+              {{#content.slide}}
+                  And an other slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  Yet an other one
+              {{/content.slide}}
+              {{#content.slide}}
+                  An Other one (Dj Khaled)
+              {{/content.slide}}
+              {{#content.slide}}
+                  The final slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  The final final slide
+              {{/content.slide}}
+          {{/content.list}}
+
+          {{#content.navigation as |nav|}}
+              <span
+                onclick={{action nav.slideAction nav.index}}
+                role="button"
+              >
+                  {{nav.index}}
+              </span>
+          {{/content.navigation}}
+      {{/blanc-slider}}
+    `);
+
+    const list = this.element.querySelectorAll('ul li');
+    assert.equal(list.length, 6);
+
+    const navigationItems = this.element.querySelectorAll(
+      '.blanc-slider-navigation span'
+    );
+    assert.equal(navigationItems.length, 6);
+  });
 });
