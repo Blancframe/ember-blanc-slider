@@ -1,5 +1,7 @@
 # ember-blanc-slider [![Build Status](https://travis-ci.com/Blancframe/ember-blanc-slider.svg?branch=master)](https://travis-ci.com/Blancframe/ember-blanc-slider)
 
+[![Coverage Status](https://coveralls.io/repos/github/onepercentclub/reef/badge.svg?branch=master&t=Z5eKvl)](https://coveralls.io/github/onepercentclub/reef?branch=master)
+
 Accessible simple content slider
 
 ## Compatibility
