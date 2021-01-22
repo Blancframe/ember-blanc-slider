@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render } from '@ember/test-helpers';
+import { click, render, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | blanc-slider', function (hooks) {
@@ -229,5 +229,63 @@ module('Integration | Component | blanc-slider', function (hooks) {
     assert.equal(items[0].classList.contains('active'), false);
     assert.equal(items[1].classList.contains('active'), false);
     assert.equal(items[2].classList.contains('active'), true);
+  });
+
+  test('we can navigate thru slider with swipe gestures', async function (assert) {
+    await render(hbs`
+      {{#blanc-slider auto=false use="fade" as |content|}}
+          {{#content.list}}
+              {{#content.slide}}
+                  Slide one and some content
+              {{/content.slide}}
+              {{#content.slide}}
+                  And an other slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  Yet an other one
+              {{/content.slide}}
+          {{/content.list}}
+      {{/blanc-slider}}
+    `);
+
+    const list = this.element.querySelectorAll('ul li');
+
+    assert.equal(list[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(list[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(list[2].getAttribute('aria-atomic'), 'false');
+
+    await triggerEvent(list[0], 'touchstart', {
+      changedTouches: [{ touchType: 'direct', clientX: 0, clientY: 0 }],
+      touches: [{ touchType: 'direct', clientX: 390, clientY: 10 }],
+    });
+    await triggerEvent(list[0], 'touchmove', {
+      changedTouches: [{ touchType: 'direct', clientX: 50, clientY: 0 }],
+      touches: [{ touchType: 'direct', clientX: 375, clientY: 10 }],
+    });
+    await triggerEvent(list[0], 'touchend', {
+      changedTouches: [{ touchType: 'direct', clientX: 80, clientY: 10 }],
+      touches: [{ touchType: 'direct', clientX: 375, clientY: 10 }],
+    });
+
+    assert.equal(list[0].getAttribute('aria-atomic'), 'false');
+    assert.equal(list[1].getAttribute('aria-atomic'), 'true');
+    assert.equal(list[2].getAttribute('aria-atomic'), 'false');
+
+    await triggerEvent(list[0], 'touchstart', {
+      changedTouches: [{ touchType: 'direct', clientX: 0, clientY: 0 }],
+      touches: [{ touchType: 'direct', clientX: 375, clientY: 10 }],
+    });
+    await triggerEvent(list[0], 'touchmove', {
+      changedTouches: [{ touchType: 'direct', clientX: 50, clientY: 0 }],
+      touches: [{ touchType: 'direct', clientX: 390, clientY: 10 }],
+    });
+    await triggerEvent(list[0], 'touchend', {
+      changedTouches: [{ touchType: 'direct', clientX: 80, clientY: 10 }],
+      touches: [{ touchType: 'direct', clientX: 390, clientY: 10 }],
+    });
+
+    assert.equal(list[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(list[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(list[2].getAttribute('aria-atomic'), 'false');
   });
 });
