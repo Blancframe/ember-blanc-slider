@@ -1,7 +1,25 @@
 {{#each items as |item|}}
-    {{slide-navigation-item
-        index=item.index
-        slideAction=(action slideAction)
-        isActive=item.isActive
-    }}
+    {{#if hasBlock}}
+        {{yield
+            (hash
+                index=item.index
+                item=item.element.innerHTML
+                slideAction=(action slideAction)
+                isActive=item.isActive
+                )
+        }}
+    {{else if customNavigationComponent}}
+        {{component
+            customNavigationComponent
+            index=item.index
+            slideAction=(action slideAction)
+            isActive=item.isActive
+        }}
+    {{else}}
+        {{slide-navigation-item
+            index=item.index
+            slideAction=(action slideAction)
+            isActive=item.isActive
+        }}
+    {{/if}}
 {{/each}}

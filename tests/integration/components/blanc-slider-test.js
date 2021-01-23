@@ -2,6 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import Component from '@ember/component';
 
 module('Integration | Component | blanc-slider', function (hooks) {
   setupRenderingTest(hooks);
@@ -287,5 +288,139 @@ module('Integration | Component | blanc-slider', function (hooks) {
     assert.equal(list[0].getAttribute('aria-atomic'), 'true');
     assert.equal(list[1].getAttribute('aria-atomic'), 'false');
     assert.equal(list[2].getAttribute('aria-atomic'), 'false');
+  });
+
+  test('it renders custom navigation', async function (assert) {
+    assert.expect(12);
+
+    await render(hbs`
+      {{#blanc-slider as |content|}}
+          {{#content.list}}
+              {{#content.slide}}
+                  Slide one and some content
+              {{/content.slide}}
+              {{#content.slide}}
+                  And an other slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  Yet an other one
+              {{/content.slide}}
+              {{#content.slide}}
+                  An Other one (Dj Khaled)
+              {{/content.slide}}
+              {{#content.slide}}
+                  The final slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  The final final slide
+              {{/content.slide}}
+          {{/content.list}}
+
+          {{#content.navigation as |nav|}}
+              <span
+                onclick={{action nav.slideAction nav.index}}
+                aria-atomic={{if nav.isActive "true" "false"}}
+                role="button"
+              >
+                  {{nav.index}}
+              </span>
+          {{/content.navigation}}
+      {{/blanc-slider}}
+    `);
+
+    const list = this.element.querySelectorAll('ul li');
+    assert.equal(list.length, 6);
+
+    const navigationItems = this.element.querySelectorAll(
+      '.blanc-slider-navigation span'
+    );
+    assert.equal(navigationItems.length, 6);
+
+    assert.equal(navigationItems[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(navigationItems[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[3].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[4].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[5].getAttribute('aria-atomic'), 'false');
+
+    await click(navigationItems[2]);
+    assert.equal(navigationItems[0].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'true');
+
+    await click(navigationItems[4]);
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[4].getAttribute('aria-atomic'), 'true');
+  });
+
+  test('it renders custom navigation component', async function (assert) {
+    // assert.expect(12);
+    await this.owner.register(
+      'component:custom-navigate',
+      Component.extend({
+        layout: hbs`
+        <span
+          onclick={{action slideAction index}}
+          aria-atomic={{if isActive "true" "false"}}
+          role="button"
+        >
+            name-{{index}}
+        </span>
+      `,
+      })
+    );
+
+    await render(hbs`
+      {{#blanc-slider as |content|}}
+          {{#content.list}}
+              {{#content.slide}}
+                  Slide one and some content
+              {{/content.slide}}
+              {{#content.slide}}
+                  And an other slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  Yet an other one
+              {{/content.slide}}
+              {{#content.slide}}
+                  An Other one (Dj Khaled)
+              {{/content.slide}}
+              {{#content.slide}}
+                  The final slide
+              {{/content.slide}}
+              {{#content.slide}}
+                  The final final slide
+              {{/content.slide}}
+          {{/content.list}}
+
+          {{content.navigation
+            customNavigationComponent="custom-navigate"
+          }}
+      {{/blanc-slider}}
+    `);
+
+    const list = this.element.querySelectorAll('ul li');
+    assert.equal(list.length, 6);
+
+    const navigationItems = this.element.querySelectorAll(
+      '.blanc-slider-navigation span'
+    );
+    assert.equal(navigationItems.length, 6);
+
+    assert.equal(navigationItems[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(navigationItems[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[3].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[4].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[5].getAttribute('aria-atomic'), 'false');
+
+    await click(navigationItems[2]);
+    assert.equal(navigationItems[0].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'true');
+
+    await click(navigationItems[4]);
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[4].getAttribute('aria-atomic'), 'true');
+
+    await this.owner.unregister('component:custom-navigate');
   });
 });
