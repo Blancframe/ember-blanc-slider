@@ -1,6 +1,4 @@
-# ember-blanc-slider [![Build Status](https://travis-ci.com/Blancframe/ember-blanc-slider.svg?branch=master)](https://travis-ci.com/Blancframe/ember-blanc-slider)
-
-[![Coverage Status](https://coveralls.io/repos/github/onepercentclub/reef/badge.svg?branch=master&t=Z5eKvl)](https://coveralls.io/github/onepercentclub/reef?branch=master)
+# ember-blanc-slider [![Build Status](https://travis-ci.com/Blancframe/ember-blanc-slider.svg?branch=master)](https://travis-ci.com/Blancframe/ember-blanc-slider) [![Coverage Status](https://coveralls.io/repos/github/onepercentclub/reef/badge.svg?branch=master&t=Z5eKvl)](https://coveralls.io/github/onepercentclub/reef?branch=master)
 
 Accessible simple content slider
 
@@ -85,8 +83,46 @@ Returns boolean, will be true when auto play
 
 Will show the navigation
 
+#### This will give you the default navigation items
+
 ```handlebars
 {{content.navigation}}
+```
+
+#### You can wrap a custom element and use the following properties to control it: `item`, `slideAction`, 'isActive', `index`
+
+```handlebars
+{{#content.navigation as |nav|}}
+  <span
+    onclick={{action nav.slideAction nav.index}}
+    aria-atomic={{if nav.isActive "true" "false"}}
+    role="button"
+  >
+      {{nav.index}}
+  </span>
+{{/content.navigation}}
+```
+
+#### You can pass a component name in the `customNavigationComponent` param. The following params will automatically passed in and can be used in the component to control the navigation: `item`, `slideAction`, 'isActive', `index`
+
+```handlebars
+{{content.navigation
+  customNavigationComponent="custom-navigate"
+}}
+```
+
+```text
+custom-navigate.hbs
+```
+
+```handlebars
+<span
+  onclick={{action slideAction index}}
+  aria-atomic={{if isActive "true" "false"}}
+  role="button"
+>
+    name-{{index}}
+</span>
 ```
 
 ## License
