@@ -290,7 +290,7 @@ module('Integration | Component | blanc-slider', function (hooks) {
   });
 
   test('it renders custom navigation', async function (assert) {
-    // assert.expect(4);
+    assert.expect(12);
 
     await render(hbs`
       {{#blanc-slider as |content|}}
@@ -318,6 +318,7 @@ module('Integration | Component | blanc-slider', function (hooks) {
           {{#content.navigation as |nav|}}
               <span
                 onclick={{action nav.slideAction nav.index}}
+                aria-atomic={{if nav.isActive "true" "false"}}
                 role="button"
               >
                   {{nav.index}}
@@ -333,5 +334,20 @@ module('Integration | Component | blanc-slider', function (hooks) {
       '.blanc-slider-navigation span'
     );
     assert.equal(navigationItems.length, 6);
+
+    assert.equal(navigationItems[0].getAttribute('aria-atomic'), 'true');
+    assert.equal(navigationItems[1].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[3].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[4].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[5].getAttribute('aria-atomic'), 'false');
+
+    await click(navigationItems[2]);
+    assert.equal(navigationItems[0].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'true');
+
+    await click(navigationItems[4]);
+    assert.equal(navigationItems[2].getAttribute('aria-atomic'), 'false');
+    assert.equal(navigationItems[4].getAttribute('aria-atomic'), 'true');
   });
 });
